@@ -15,57 +15,91 @@
     body {
       font-family: 'Poppins', sans-serif;
       color: var(--ink);
-      background: #fff;
+      overflow-x: hidden;
     }
 
-    /* Background Image & Overlay */
-    .bg-image {
+    /* Background foto utama */
+    body::before {
+      content: "";
       position: fixed;
-      inset: 0;
+      top: 0; left: 0; width: 100%; height: 100%;
       background: url('bg.jpg') center/cover no-repeat;
+      opacity: 0.25;
+      filter: blur(4px);
       z-index: -2;
-      transform: scale(1);
       animation: zoomBg 20s ease-in-out infinite alternate;
     }
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.7);
-      z-index: -1;
-    }
 
-    .frame { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 28px; }
+    .frame {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
     .card {
       width: min(720px, 92vw);
-      background: rgba(255,255,255,0.95);
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 28px;
       padding: 34px 26px 28px;
       position: relative;
-      box-shadow: 0 10px 40px rgba(0,0,0,.08);
+      box-shadow: 0 10px 40px rgba(0,0,0,.06);
       animation: fadeInUp 1s ease-out;
+      backdrop-filter: blur(6px);
+      overflow: hidden;
     }
-    .card:before, .card:after {
-      content: ""; position: absolute; inset: 16px; border: 2px solid var(--gold); border-radius: 22px; pointer-events: none;
-    }
-    .card:after { inset: 8px; border-color: var(--gold-soft); border-radius: 26px; }
 
-    .arabic { text-align: center; color: var(--gold); margin-bottom: 14px; font-size: 20px; }
-    h1, h2 { text-align: center; }
-    h2 { font-size: 18px; font-weight: 600; margin-bottom: 18px; }
-    p.lead { text-align: center; margin-bottom: 12px; }
-    .names { display: grid; gap: 8px; justify-items: center; margin: 18px 0; }
-    .name {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(34px, 7vw, 54px);
-      color: var(--gold);
-      animation: zoomIn 1.4s ease;
+    /* Overlay gambar transparan di atas card */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('bg.jpg') center/cover no-repeat;
+      opacity: 0.15;
+      z-index: 0;
+      animation: zoomCard 15s ease-in-out infinite alternate;
     }
+
+    /* Ornamen emas */
+    .ornament {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: url('https://i.ibb.co/mX3w2zF/gold-ornament.png') center/contain no-repeat;
+      opacity: 0.4;
+      z-index: 1;
+      animation: float 6s ease-in-out infinite;
+    }
+    .ornament.top-left { top: -30px; left: -30px; }
+    .ornament.bottom-right { bottom: -30px; right: -30px; }
+
+    /* Konten di atas overlay */
+    .card > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card:after {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 2px solid var(--gold);
+      border-radius: 22px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .arabic { text-align: center; color: var(--gold); margin-bottom: 14px; font-size: 20px; animation: fadeIn 2s ease-in-out; }
+    h2 { text-align: center; font-size: 18px; font-weight: 600; margin-bottom: 18px; }
+    p.lead { text-align: center; margin-bottom: 12px; animation: fadeIn 2.4s ease-in-out; }
+    .names { display: grid; gap: 8px; justify-items: center; margin: 18px 0; }
+    .name { font-family: 'Great Vibes', cursive; font-size: clamp(34px, 7vw, 54px); color: var(--gold); animation: zoomIn 1.4s ease; }
     .amp { font-size: 22px; color: var(--gold); margin: 6px 0; }
     .small { font-size: 13.5px; color: #6b6b6b; text-align: center; }
     .details { margin: 18px auto; width: min(560px, 86%); display: grid; gap: 10px; font-size: 15px; }
     .row { display: grid; grid-template-columns: 120px 1fr; gap: 10px; }
     .row .label { font-weight: 600; color: #57451a; }
-    .guest { margin: 18px auto; width: min(560px, 86%); background: #fff7e6; border: 1.5px solid var(--gold-soft); border-radius: 16px; padding: 12px 16px; text-align: center; }
+    .guest { margin: 18px auto; width: min(560px, 86%); background: rgba(255,247,230,0.9); border: 1.5px solid var(--gold-soft); border-radius: 16px; padding: 12px 16px; text-align: center; animation: fadeIn 3s ease-in-out; }
     .guest .title { font-weight: 600; color: #6a5520; }
     .guest .name { font-weight: 600; color: #2f2f2f; margin-top: 4px; }
     .thanks { text-align: center; font-size: 14.5px; margin: 14px auto; width: 86%; }
@@ -73,18 +107,21 @@
     .sign { text-align: center; font-family: 'Great Vibes', cursive; color: var(--gold); font-size: clamp(26px, 6vw, 40px); margin-top: 8px; }
     footer { text-align: center; font-size: 12px; color: #9a8a5c; margin-top: 16px; }
 
+    /* Animasi */
     @keyframes fadeInUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
     @keyframes zoomIn { from {opacity: 0; transform: scale(.9);} to {opacity: 1; transform: scale(1);} }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    @keyframes float { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
     @keyframes zoomBg { from {transform: scale(1);} to {transform: scale(1.05);} }
+    @keyframes zoomCard { from {transform: scale(1);} to {transform: scale(1.08);} }
   </style>
 </head>
 <body>
-  <!-- Background & Overlay -->
-  <div class="bg-image"></div>
-  <div class="overlay"></div>
-
   <div class="frame">
     <main class="card">
+      <div class="ornament top-left"></div>
+      <div class="ornament bottom-right"></div>
+
       <div class="arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
       <h2>Assalamu’alaikum Warahmatullahi Wabarakatuh</h2>
       <p class="lead">Dengan memohon Rahmat dan Ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara</p>
@@ -118,15 +155,12 @@
   </div>
 
   <script>
-    // Ambil parameter dari URL
     function getGuestName() {
       const params = new URLSearchParams(window.location.search);
       const raw = params.get('to');
       if (!raw) return null;
       return decodeURIComponent(raw.replace(/\+/g, ' ')).trim();
     }
-
-    // Tampilkan nama jika ada
     document.addEventListener('DOMContentLoaded', () => {
       const guestName = getGuestName();
       if (guestName) {
