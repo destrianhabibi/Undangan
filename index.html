@@ -10,6 +10,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Poppins', sans-serif; color: var(--ink); overflow-x: hidden; }
 
+    /* Background foto utama */
     body::before {
       content: "";
       position: fixed;
@@ -34,15 +35,21 @@
       overflow: hidden;
     }
 
+    /* Overlay gambar transparan di atas card dengan gradient */
     .card::before {
       content: "";
       position: absolute; inset: 0;
-      background: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)), url('bg.jpg') center/cover no-repeat;
+      background: linear-gradient(
+          rgba(255, 255, 255, 0.4),
+          rgba(255, 255, 255, 0.4)
+        ),
+        url('bg.jpg') center/cover no-repeat;
       opacity: 0.25;
       z-index: 0;
       animation: zoomCard 15s ease-in-out infinite alternate;
     }
 
+    /* Ornamen emas */
     .ornament { position: absolute; width: 120px; height: 120px; background: url('https://i.ibb.co/mX3w2zF/gold-ornament.png') center/contain no-repeat; opacity: 0.4; z-index: 1; animation: float 6s ease-in-out infinite; }
     .ornament.top-left { top: -30px; left: -30px; }
     .ornament.bottom-right { bottom: -30px; right: -30px; }
@@ -54,7 +61,6 @@
       border: 2px solid var(--gold); border-radius: 22px; pointer-events: none; z-index: 2;
     }
 
-    /* Konten styling tetap seperti sebelumnya */
     .arabic { text-align: center; color: var(--gold); margin-bottom: 14px; font-size: 20px; animation: fadeIn 2s ease-in-out; }
     h2 { text-align: center; font-size: 18px; font-weight: 600; margin-bottom: 18px; }
     p.lead { text-align: center; margin-bottom: 12px; animation: fadeIn 2.4s ease-in-out; }
