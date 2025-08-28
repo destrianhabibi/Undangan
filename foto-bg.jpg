@@ -1,0 +1,13 @@
+body {
+  background: url('foto-bg.jpg') center/cover no-repeat fixed;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.5); /* efek transparan */
+  z-index: -1;
+}
+.card {
+  position: relative;
+  z-index: 1;
+}
