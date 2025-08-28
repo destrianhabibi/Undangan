@@ -6,19 +6,10 @@
   <title>Undangan Syukuran Pernikahan — Evy & Destran</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --gold: #b68d2b;
-      --gold-soft: #d7b96a;
-      --ink: #3a3a3a;
-    }
+    :root { --gold: #b68d2b; --gold-soft: #d7b96a; --ink: #3a3a3a; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: var(--ink);
-      overflow-x: hidden;
-    }
+    body { font-family: 'Poppins', sans-serif; color: var(--ink); overflow-x: hidden; }
 
-    /* Background foto utama */
     body::before {
       content: "";
       position: fixed;
@@ -30,13 +21,7 @@
       animation: zoomBg 20s ease-in-out infinite alternate;
     }
 
-    .frame {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 28px;
-    }
+    .frame { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 28px; }
     .card {
       width: min(720px, 92vw);
       background: rgba(255, 255, 255, 0.9);
@@ -49,50 +34,27 @@
       overflow: hidden;
     }
 
-    /* Overlay gambar transparan di atas card dengan gradient */
     .card::before {
       content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-          rgba(255, 255, 255, 0.4),
-          rgba(255, 255, 255, 0.4)
-        ),
-        url('bg.jpg') center/cover no-repeat;
+      position: absolute; inset: 0;
+      background: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)), url('bg.jpg') center/cover no-repeat;
       opacity: 0.25;
       z-index: 0;
       animation: zoomCard 15s ease-in-out infinite alternate;
     }
 
-    /* Ornamen emas */
-    .ornament {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      background: url('https://i.ibb.co/mX3w2zF/gold-ornament.png') center/contain no-repeat;
-      opacity: 0.4;
-      z-index: 1;
-      animation: float 6s ease-in-out infinite;
-    }
+    .ornament { position: absolute; width: 120px; height: 120px; background: url('https://i.ibb.co/mX3w2zF/gold-ornament.png') center/contain no-repeat; opacity: 0.4; z-index: 1; animation: float 6s ease-in-out infinite; }
     .ornament.top-left { top: -30px; left: -30px; }
     .ornament.bottom-right { bottom: -30px; right: -30px; }
 
-    /* Konten di atas overlay */
-    .card > * {
-      position: relative;
-      z-index: 2;
-    }
+    .card > * { position: relative; z-index: 2; }
 
     .card:after {
-      content: "";
-      position: absolute;
-      inset: 16px;
-      border: 2px solid var(--gold);
-      border-radius: 22px;
-      pointer-events: none;
-      z-index: 2;
+      content: ""; position: absolute; inset: 16px;
+      border: 2px solid var(--gold); border-radius: 22px; pointer-events: none; z-index: 2;
     }
 
+    /* Konten styling tetap seperti sebelumnya */
     .arabic { text-align: center; color: var(--gold); margin-bottom: 14px; font-size: 20px; animation: fadeIn 2s ease-in-out; }
     h2 { text-align: center; font-size: 18px; font-weight: 600; margin-bottom: 18px; }
     p.lead { text-align: center; margin-bottom: 12px; animation: fadeIn 2.4s ease-in-out; }
@@ -111,7 +73,6 @@
     .sign { text-align: center; font-family: 'Great Vibes', cursive; color: var(--gold); font-size: clamp(26px, 6vw, 40px); margin-top: 8px; }
     footer { text-align: center; font-size: 12px; color: #9a8a5c; margin-top: 16px; }
 
-    /* Animasi */
     @keyframes fadeInUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
     @keyframes zoomIn { from {opacity: 0; transform: scale(.9);} to {opacity: 1; transform: scale(1);} }
     @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
